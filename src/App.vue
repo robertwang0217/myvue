@@ -1,21 +1,14 @@
 <template>
-  <div id="app">
-      <b-container class="bv-example-row">
-        <b-row>
-          <b-col>1 of 3</b-col>
-          <b-col>2 of 3</b-col>
-          <b-col>3 of 3</b-col>
-        </b-row>
-      </b-container>
-  </div>
+    <Map></Map>
 </template>
 
 <script>
 
+import Map from "./components/Map";
+
 export default {
   name: 'App',
-  components: {
-  }
+  components: { Map }
 }
 </script>
 
