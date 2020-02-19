@@ -3,16 +3,30 @@
         <b-container>
             <b-row>
                 <b-col>
+                    <p class="sidebarP">Auto Complete:</p>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
                     <b-form-input name="suburb" type="text" list="my-list-id"></b-form-input>
                     <datalist id="my-list-id">
-                        <option>Manual Option</option>
-                        <option v-for="(value, key) in options" :key="key">{{ value }}</option>
+                        <option v-for="(value, key) in suggests" :key="key">{{ value }}</option>
                     </datalist>
                 </b-col>
             </b-row>
             <b-row>
                 <b-col>
-                    
+                    <p class="sidebarP">Drop Down:</p>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <b-form-select v-model="selected" :options="options"></b-form-select>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <p class="sidebarP">Switch:</p>
                 </b-col>
             </b-row>
             <b-row>
@@ -25,7 +39,8 @@
 </template>
 
 <script>
-//import sourceData from "../assets/files/testBlob.json";
+import $ from 'jquery'
+import sourceData from "../assets/files/testBlob.json";
 
 export default {
 
@@ -36,16 +51,18 @@ export default {
     },
 
     data: () => ({
-        options: []
+        suggests: [],
+        options: [],
+        selected: '',
     }),
 
     mounted() {
-        // jQuery.each( sourceData.features, function( index, value ) {
-        //     if( !jQuery.inArray( value.properties.project.Suburb, this.options ) ) {
-        //         this.options.push( value.properties.project.Suburb );
-        //     }
-        // });
-        //onsole.log(this.options);
+        let self = this
+        $.each( sourceData.features, function( index, value ) {
+            if( !self.suggests.includes(value.properties.project.Suburb) ) {
+                self.suggests.push( value.properties.project.Suburb );
+            }
+        });
     },
 
     beforeDestroy () {

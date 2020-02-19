@@ -8,6 +8,7 @@ Vue.use(IconsPlugin)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// Implement mapbox
 import mapbox from 'mapbox-gl';
 Object.defineProperty(Vue.prototype, '$mapbox', { value: mapbox });
 

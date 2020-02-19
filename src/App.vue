@@ -1,15 +1,15 @@
 <template lang="html">
 	<div id='appModule'>
-		<b-container>
+		<div style="padding-top:20px">
 			<b-row>
-				<b-col cols="2">
+				<b-col cols="3">
 					<Sidebar></Sidebar>
 				</b-col>
-				<b-col cols="10">
+				<b-col cols="9">
 					<Map></Map>
 				</b-col>
 			</b-row>
-		</b-container>
+		</div>
 	</div>    
 </template>
 
