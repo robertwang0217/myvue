@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="app">
+    <div id="mapModule">
         <b-container class="bv-example-row">
             <b-row>
                 <b-col>

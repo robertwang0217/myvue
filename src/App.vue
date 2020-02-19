@@ -1,14 +1,26 @@
-<template>
-    <Map></Map>
+<template lang="html">
+	<div id='appModule'>
+		<b-container>
+			<b-row>
+				<b-col cols="2">
+					<Sidebar></Sidebar>
+				</b-col>
+				<b-col cols="10">
+					<Map></Map>
+				</b-col>
+			</b-row>
+		</b-container>
+	</div>    
 </template>
 
 <script>
 
 import Map from "./components/Map";
+import Sidebar from "./components/Sidebar";
 
 export default {
   name: 'App',
-  components: { Map }
+  components: { Map, Sidebar }
 }
 </script>
 
