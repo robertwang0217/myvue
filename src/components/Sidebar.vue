@@ -3,7 +3,7 @@
         <b-container>
             <b-row>
                 <b-col>
-                    <p class="sidebarP">Auto Complete:</p>
+                    <p class="sidebarP">Title (Auto Complete):</p>
                 </b-col>
             </b-row>
             <b-row>
@@ -16,7 +16,7 @@
             </b-row>
             <b-row>
                 <b-col>
-                    <p class="sidebarP">Drop Down:</p>
+                    <p class="sidebarP">Suburb (Drop Down):</p>
                 </b-col>
             </b-row>
             <b-row>
@@ -59,8 +59,11 @@ export default {
     mounted() {
         let self = this
         $.each( sourceData.features, function( index, value ) {
-            if( !self.suggests.includes(value.properties.project.Suburb) ) {
-                self.suggests.push( value.properties.project.Suburb );
+            if( !self.suggests.includes(value.properties.project.Title) ) {
+                self.suggests.push( value.properties.project.Title );
+            }
+            if( !self.options.includes(value.properties.project.Suburb) ) {
+                self.options.push( value.properties.project.Suburb );
             }
         });
     },
