@@ -3,35 +3,27 @@
         <b-container>
             <b-row>
                 <b-col>
-                    <p class="sidebarP">Title (Auto Complete):</p>
+                    <b-form-group label="Title (Auto Complete):">
+                        <b-form-input name="suburb" type="text" list="my-list-id"></b-form-input>
+                        <datalist id="my-list-id">
+                            <option v-for="(value, key) in suggests" :key="key">{{ value }}</option>
+                        </datalist>
+                    </b-form-group>
                 </b-col>
             </b-row>
             <b-row>
                 <b-col>
-                    <b-form-input name="suburb" type="text" list="my-list-id"></b-form-input>
-                    <datalist id="my-list-id">
-                        <option v-for="(value, key) in suggests" :key="key">{{ value }}</option>
-                    </datalist>
+                    <b-form-group label="Suburb (Drop Down):">
+                        <b-form-select v-model="selected" :options="options"></b-form-select>
+                    </b-form-group>                    
                 </b-col>
             </b-row>
             <b-row>
                 <b-col>
-                    <p class="sidebarP">Suburb (Drop Down):</p>
-                </b-col>
-            </b-row>
-            <b-row>
-                <b-col>
-                    <b-form-select v-model="selected" :options="options"></b-form-select>
-                </b-col>
-            </b-row>
-            <b-row>
-                <b-col>
-                    <p class="sidebarP">Switch:</p>
-                </b-col>
-            </b-row>
-            <b-row>
-                <b-col>
-                    
+                    <b-form-group label="Stage (Switch):">
+                          <b-form-radio v-model="choice" name="approved" value="1">DA Approved</b-form-radio>
+                          <b-form-radio v-model="choice" name="approved" value="0">Not DA Approved</b-form-radio>
+                    </b-form-group>
                 </b-col>
             </b-row>
         </b-container>
@@ -54,6 +46,7 @@ export default {
         suggests: [],
         options: [],
         selected: '',
+        choice: '',
     }),
 
     mounted() {
