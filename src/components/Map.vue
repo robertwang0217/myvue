@@ -22,10 +22,12 @@ export default {
     },
 
     data: () => ({
+        mapObj: null
     }),
 
     mounted() {
-        var map = new this.$mapbox.Map({
+        var self = this;
+        var map = new self.$mapbox.Map({
             container: 'map',
             accessToken: "pk.eyJ1Ijoicm9iZXJ0d2FuZzAyMTciLCJhIjoiY2s2cnFhMmwzMDhkNzNvcWl5cjFpdXc5dCJ9.gAkCQbVUq9lQY76A368odg",
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -33,7 +35,8 @@ export default {
             zoom: 14,
 
         });
-        
+        self.mapObj = map
+
         map.on('load', function() {
             map.addSource('points', {
                 'type': 'geojson',
@@ -41,7 +44,7 @@ export default {
             });
 
             map.addLayer({
-                'id': 'mylayer',
+                'id': 'maplayer',
                 'type': 'symbol',
                 'source': 'points',
                 'layout': {
@@ -58,7 +61,17 @@ export default {
         });
 
         window.eventBus.$on('update', function(data) {
-            console.log(data);
+            var mapFilter = [ "all" ]
+            if( data.title ) {
+                mapFilter.push(["==", ['get', 'Title', ['get', 'project']], data.title]);
+            }
+            if( data.suburb ) {
+                mapFilter.push(["==", ['get', 'Suburb', ['get', 'project']], data.suburb]);
+            }
+            if( data.owner ) {
+                mapFilter.push(["==", ['get', 'Ownership', ['get', 'project']], data.owner]);
+            }
+            self.mapObj.setFilter('maplayer', mapFilter);
         })   
     },
 

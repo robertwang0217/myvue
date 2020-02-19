@@ -4,7 +4,7 @@
             <b-row>
                 <b-col>
                     <b-form-group label="Title (Auto Complete):">
-                        <b-form-input v-model="title" name="title" type="text" list="my-list-id" @change="update"></b-form-input>
+                        <b-form-input v-model="title" name="title" type="text" list="my-list-id" @change="update()"></b-form-input>
                         <datalist id="my-list-id">
                             <option v-for="(value, key) in suggests" :key="key">{{ value }}</option>
                         </datalist>
@@ -14,15 +14,15 @@
             <b-row>
                 <b-col>
                     <b-form-group label="Suburb (Drop Down):">
-                        <b-form-select v-model="suburb" :options="options" @change="update"></b-form-select>
+                        <b-form-select v-model="suburb" :options="options" @change="update()"></b-form-select>
                     </b-form-group>                    
                 </b-col>
             </b-row>
             <b-row>
                 <b-col>
-                    <b-form-group label="Stage (Switch):">
-                          <b-form-radio v-model="stage" name="approved" value="1" @change="update">DA Approved</b-form-radio>
-                          <b-form-radio v-model="stage" name="approved" value="0" @change="update">Not DA Approved</b-form-radio>
+                    <b-form-group label="Ownership (Switch):">
+                          <b-form-radio v-model="owner" name="owner" value="PRIVATE" @change="update('PRIVATE')">PRIVATE</b-form-radio>
+                          <b-form-radio v-model="owner" name="owner" value="STATE" @change="update('STATE')">STATE</b-form-radio>
                     </b-form-group>
                 </b-col>
             </b-row>
@@ -47,7 +47,7 @@ export default {
         options: [],
         title: '',
         suburb: '',
-        stage: '',
+        owner: '',
     }),
 
     mounted() {
@@ -69,8 +69,11 @@ export default {
     },
 
     methods: {
-        update() {
-            window.eventBus.$emit('update', { title: this.title, suburb: this.suburb, stage: this.stage })
+        update( own = null ) {
+            if( own != null ) {
+                this.owner = own;
+            }
+            window.eventBus.$emit('update', { title: this.title, suburb: this.suburb, owner: this.owner })
         }
     },
 
