@@ -17,6 +17,8 @@ import './custom.scss'
 
 Vue.config.productionTip = false
 
+window.eventBus = new Vue()
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')

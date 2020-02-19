@@ -33,7 +33,7 @@ export default {
             zoom: 14,
 
         });
-
+        
         map.on('load', function() {
             map.addSource('points', {
                 'type': 'geojson',
@@ -55,10 +55,15 @@ export default {
                 'text-anchor': 'top'
                 }
             });
-        });        
+        });
+
+        window.eventBus.$on('update', function(data) {
+            console.log(data);
+        })   
     },
 
     beforeDestroy () {
+        window.eventBus.$off('update') 
     },
 
     computed: {
