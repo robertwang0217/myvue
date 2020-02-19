@@ -73,7 +73,7 @@ export default {
             if( own != null ) {
                 this.owner = own;
             }
-            window.eventBus.$emit('update', { title: this.title, suburb: this.suburb, owner: this.owner })
+            this.$eventBus.$emit('update', { title: this.title, suburb: this.suburb, owner: this.owner })
         }
     },
 

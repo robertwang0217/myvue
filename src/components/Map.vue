@@ -60,7 +60,7 @@ export default {
             });
         });
 
-        window.eventBus.$on('update', function(data) {
+        self.$eventBus.$on('update', function(data) {
             var mapFilter = [ "all" ]
             if( data.title ) {
                 mapFilter.push(["==", ['get', 'Title', ['get', 'project']], data.title]);
@@ -76,7 +76,7 @@ export default {
     },
 
     beforeDestroy () {
-        window.eventBus.$off('update') 
+        this.$eventBus.$off('update') 
     },
 
     computed: {

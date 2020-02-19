@@ -17,7 +17,8 @@ import './custom.scss'
 
 Vue.config.productionTip = false
 
-window.eventBus = new Vue()
+var eventBus = new Vue()
+Object.defineProperty(Vue.prototype, '$eventBus', { value: eventBus });
 
 new Vue({
   render: h => h(App),
