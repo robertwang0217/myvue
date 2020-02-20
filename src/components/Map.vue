@@ -27,6 +27,7 @@ export default {
 
     mounted() {
         var self = this;
+
         var map = new self.$mapbox.Map({
             container: 'map',
             accessToken: "pk.eyJ1Ijoicm9iZXJ0d2FuZzAyMTciLCJhIjoiY2s2cnFhMmwzMDhkNzNvcWl5cjFpdXc5dCJ9.gAkCQbVUq9lQY76A368odg",
@@ -35,14 +36,18 @@ export default {
             zoom: 14,
 
         });
+
         self.mapObj = map
 
         map.on('load', function() {
+
+            // Add source data to map
             map.addSource('points', {
                 'type': 'geojson',
                 'data': sourceData
             });
 
+            // Add points layer to map
             map.addLayer({
                 'id': 'maplayer',
                 'type': 'symbol',
@@ -60,17 +65,26 @@ export default {
             });
         });
 
+        // When user filters, update the map layer
         self.$eventBus.$on('update', function(data) {
             var mapFilter = [ "all" ]
+
+            // If filter title
             if( data.title ) {
                 mapFilter.push(["==", ['get', 'Title', ['get', 'project']], data.title]);
             }
+
+            // If filter suburb
             if( data.suburb ) {
                 mapFilter.push(["==", ['get', 'Suburb', ['get', 'project']], data.suburb]);
             }
+
+            // If filter ownership
             if( data.owner ) {
                 mapFilter.push(["==", ['get', 'Ownership', ['get', 'project']], data.owner]);
             }
+
+            // Refresh map with the filters
             self.mapObj.setFilter('maplayer', mapFilter);
         })   
     },

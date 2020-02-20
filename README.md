@@ -1,1 +1,1 @@
-# myvue
+1. Have put the project on my stable shared hosting: http://webclientcentral.com.au/myvue/

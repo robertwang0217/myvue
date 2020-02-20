@@ -53,9 +53,13 @@ export default {
     mounted() {
         let self = this
         $.each( sourceData.features, function( index, value ) {
+
+            // Prepare auto complete data
             if( !self.suggests.includes(value.properties.project.Title) ) {
                 self.suggests.push( value.properties.project.Title );
             }
+
+            // Prepare dropdown data
             if( !self.options.includes(value.properties.project.Suburb) ) {
                 self.options.push( value.properties.project.Suburb );
             }
@@ -70,9 +74,12 @@ export default {
 
     methods: {
         update( own = null ) {
+
             if( own != null ) {
                 this.owner = own;
             }
+
+            // Emit filter values to map
             this.$eventBus.$emit('update', { title: this.title, suburb: this.suburb, owner: this.owner })
         }
     },
